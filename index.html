@@ -41,11 +41,18 @@
         padding-left: 20px;
       }
 
+      /* Contêiner para permitir scroll horizontal em tabelas e pré-formatados */
+      .scroll-container {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch; /* para smooth scrolling em iOS */
+        margin-top: 10px;
+        margin-bottom: 15px;
+      }
+
       table {
         border-collapse: collapse;
         width: 100%;
-        margin-top: 10px;
-        margin-bottom: 15px;
+        min-width: 600px; /* evita que a tabela fique muito estreita em telas maiores */
       }
 
       table,
@@ -59,10 +66,20 @@
         padding: 8px 12px;
         text-align: center;
         color: #333;
+        white-space: nowrap; /* evita quebra de palavras no conteúdo da tabela */
       }
 
       th {
         background-color: #e0e7f1;
+      }
+
+      pre {
+        background-color: #e0e7f1;
+        padding: 10px;
+        border-radius: 5px;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        overflow-x: auto;
       }
 
       .botao-pratica {
@@ -78,6 +95,36 @@
 
       .botao-pratica:hover {
         background-color: #0056b3;
+      }
+
+      /* Media Query para telas pequenas */
+      @media (max-width: 480px) {
+        body {
+          padding: 10px;
+        }
+
+        .tema {
+          padding: 15px;
+          margin: 10px auto;
+          max-width: 100%;
+          border-radius: 8px;
+        }
+
+        /* Remover min-width para telas pequenas para ajustar */
+        table {
+          min-width: unset;
+        }
+
+        th,
+        td {
+          padding: 6px 8px;
+          font-size: 14px;
+        }
+
+        pre {
+          font-size: 14px;
+          padding: 8px;
+        }
       }
     </style>
   </head>
@@ -203,188 +250,75 @@
       <h2>🩸 Tipagem Sanguínea</h2>
       <p>
         O tipo sanguíneo é uma classificação que identifica os antígenos
-        presentes na superfície das hemácias (glóbulos vermelhos). Os principais
-        sistemas usados para essa classificação são:
+        presentes na superfície das hemácias (glóbulos vermelhos) e os
+        anticorpos presentes no plasma.
       </p>
-      <ul>
-        <li>
-          <strong>Sistema ABO:</strong> Define os tipos A, B, AB e O, de acordo
-          com os antígenos A e B.
-        </li>
-        <li>
-          <strong>Sistema Rh:</strong> Classifica o sangue como Rh positivo
-          (presença do fator Rh) ou Rh negativo (ausência do fator Rh).
-        </li>
-      </ul>
-      <p><strong>Por que a tipagem sanguínea é importante?</strong></p>
-      <ul>
-        <li>
-          É fundamental para garantir a compatibilidade em transfusões de sangue
-          e transplantes de órgãos, evitando reações adversas graves.
-        </li>
-        <li>
-          A transfusão com sangue incompatível pode causar choque hemolítico,
-          que é uma reação imunológica perigosa.
-        </li>
-      </ul>
+
+      <h3>Grupos Sanguíneos ABO</h3>
+      <p>Existem 4 principais grupos sanguíneos do sistema ABO:</p>
+      <div class="scroll-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Grupo</th>
+              <th>Antígeno na hemácia</th>
+              <th>Anticorpo no plasma</th>
+              <th>Pode receber sangue de</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>A</td>
+              <td>A</td>
+              <td>Anti-B</td>
+              <td>A e O</td>
+            </tr>
+            <tr>
+              <td>B</td>
+              <td>B</td>
+              <td>Anti-A</td>
+              <td>B e O</td>
+            </tr>
+            <tr>
+              <td>AB</td>
+              <td>A e B</td>
+              <td>Não tem</td>
+              <td>A, B, AB e O (receptor universal)</td>
+            </tr>
+            <tr>
+              <td>O</td>
+              <td>Não tem</td>
+              <td>Anti-A e Anti-B</td>
+              <td>O</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Fator Rh</h3>
       <p>
-        <strong>Tipos Sanguíneos e suas características principais:</strong>
+        Além do sistema ABO, o fator Rh (Rhesus) é importante. Se a pessoa tem o
+        antígeno D, ela é Rh+; se não, é Rh-.
       </p>
-      <table>
-        <thead>
-          <tr>
-            <th>Tipo Sanguíneo</th>
-            <th>Antígeno na Hemácia</th>
-            <th>Anticorpos no Plasma</th>
-            <th>Pode Receber Sangue de</th>
-            <th>Pode Doar Sangue para</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>A</td>
-            <td>A</td>
-            <td>Anti-B</td>
-            <td>A e O</td>
-            <td>A e AB</td>
-          </tr>
-          <tr>
-            <td>B</td>
-            <td>B</td>
-            <td>Anti-A</td>
-            <td>B e O</td>
-            <td>B e AB</td>
-          </tr>
-          <tr>
-            <td>AB</td>
-            <td>A e B</td>
-            <td>Nenhum</td>
-            <td>A, B, AB e O</td>
-            <td>Apenas AB</td>
-          </tr>
-          <tr>
-            <td>O</td>
-            <td>Nenhum</td>
-            <td>Anti-A e Anti-B</td>
-            <td>Apenas O</td>
-            <td>A, B, AB e O (doador universal)</td>
-          </tr>
-        </tbody>
-      </table>
-      <p><strong>Sistema Rh:</strong></p>
       <ul>
-        <li>Se a pessoa tem o fator Rh, é Rh positivo (+).</li>
-        <li>Se não tem, é Rh negativo (-).</li>
-        <li>
-          Pacientes Rh negativos só podem receber sangue Rh negativo para evitar
-          sensibilização.
-        </li>
-      </ul>
-      <p><strong>Exemplo prático para transfusão:</strong></p>
-      <ul>
-        <li>
-          Um paciente com sangue tipo A+ pode receber sangue do tipo A+ ou O+.
-        </li>
-        <li>
-          Um paciente com sangue O- pode doar para qualquer tipo, mas só pode
-          receber O-.
-        </li>
-      </ul>
-      <p><strong>Resumo final:</strong></p>
-      <ul>
-        <li>Conhecer o tipo sanguíneo é essencial para evitar complicações.</li>
-        <li>Sempre realizar teste de compatibilidade antes da transfusão.</li>
-        <li>
-          No pré-natal, a tipagem Rh é importante para prevenir a doença
-          hemolítica do recém-nascido.
-        </li>
-      </ul>
-      <a class="botao-pratica" href="sangue.html"
-        >Acessar Prática de Tipagem Sanguínea</a
-      >
-    </div>
-
-    <div class="tema">
-      <h2>💊 Cálculo de Medicações</h2>
-      <p>
-        <strong>Responsabilidade:</strong> A administração de medicamentos é
-        responsabilidade da equipe de enfermagem. Erros não detectados recaem
-        sobre os profissionais diretamente envolvidos na administração.
-      </p>
-
-      <p><strong>Conceitos:</strong></p>
-      <ul>
-        <li>
-          <strong>Solução:</strong> mistura homogênea (soluto + solvente).
-        </li>
-        <li>
-          <strong>Exemplo:</strong> SF 0,9% = 0,9g em 100ml; SG 5% = 5g em
-          100ml.
-        </li>
-        <li>
-          <strong>Tipos:</strong> Isotônica (SF 0,9%, SG 5%), Hipotônica (SF
-          0,45%), Hipertônica (Glicose 10%).
-        </li>
-        <li><strong>Concentração:</strong> gramas/mL.</li>
-        <li><strong>Proporção:</strong> Ex: 1:500 → 1g para 500ml.</li>
-        <li><strong>Porcentagem:</strong> Ex: 7% → 7g para 100ml.</li>
+        <li>Rh+ pode receber sangue Rh+ ou Rh-.</li>
+        <li>Rh- deve receber apenas sangue Rh- para evitar reações.</li>
       </ul>
 
-      <p><strong>Reconstituição e Diluição:</strong></p>
-      <ul>
-        <li>
-          <strong>Reconstituição:</strong> adicionar diluente ao pó (ex: água
-          destilada).
-        </li>
-        <li>
-          <strong>Diluição:</strong> aumentar o volume com diluente compatível.
-        </li>
-      </ul>
+      <h3>Exemplo de Cálculo de Compatibilidade</h3>
+      <div class="scroll-container">
+        <pre>
+Cálculo para doação de sangue para uma pessoa A+:
 
-      <p><strong>Regra de Três:</strong> usada para calcular dosagens.</p>
-      <pre>Ex: 0,5g → 2ml<br>     0,25g → X<br>     X = (0,25 × 2) ÷ 0,5 = 1ml</pre>
+- Pode receber sangue dos grupos: A+ e A-, O+ e O-
+- Por ser Rh+, pode receber tanto Rh+ quanto Rh-
 
-      <p><strong>Conversões Importantes:</strong></p>
-      <ul>
-        <li>1ml = 20 gotas (macrogotas)</li>
-        <li>1ml = 60 microgotas</li>
-        <li>1 gota = 3 microgotas</li>
-        <li>1g = 1000mg</li>
-        <li>1L = 1000ml</li>
-      </ul>
+Logo, os tipos compatíveis são: A+, A-, O+, O-
+        </pre>
+      </div>
 
-      <p><strong>Colheres:</strong></p>
-      <ul>
-        <li>Sopa: 15ml</li>
-        <li>Sobremesa: 10ml</li>
-        <li>Chá: 5ml</li>
-        <li>Café: 2,5–3ml</li>
-      </ul>
-
-      <p><strong>Sistema Métrico:</strong> baseado em múltiplos de 10.</p>
-      <ul>
-        <li>mg → g: dividir por 1000</li>
-        <li>g → mg: multiplicar por 1000</li>
-        <li>L → ml: multiplicar por 1000</li>
-      </ul>
-
-      <p><strong>Fórmulas de Gotejamento:</strong></p>
-      <ul>
-        <li><strong>Macrogotas:</strong> Volume ÷ (Tempo(h) × 3)</li>
-        <li><strong>Microgotas:</strong> Volume ÷ Tempo(h)</li>
-      </ul>
-
-      <pre>
-Exemplo:
-Macrogotas: 100 mL em 1h → 100 ÷ (1 x 3) = 33,33 gotas/min
-OU
-→ 100 x 20 (1ml equivale a 20 gotas) x 60 (1hr = 60min) = 2000 ÷ 60 = 33,33 gotas/min
-Microgotas: 100 mL em 1h → 100 ÷ 1 = 100 microgotas/min
-    </pre
-      >
-
-      <a class="botao-pratica" href="calc.html"
-        >Acessar Prática de Cálculo de Medicações</a
+      <a class="botao-pratica" href="tipagem-sanguinea.html"
+        >Praticar Tipagem</a
       >
     </div>
   </body>
