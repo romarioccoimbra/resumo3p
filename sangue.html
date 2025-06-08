@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Compatibilidade Sanguínea</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 10px;
+      background: #f9f9f9;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .section {
+      background: #fff;
+      padding: 10px;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    th, td {
+      padding: 8px;
+      border: 1px solid #ccc;
+      text-align: center;
+    }
+
+    .draggables {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin: 10px 0;
+    }
+
+    .draggable {
+      padding: 10px 14px;
+      background-color: #007BFF;
+      color: white;
+      border-radius: 6px;
+      cursor: grab;
+      user-select: none;
+      font-size: 16px;
+    }
+
+    .dropzone {
+      min-height: 36px;
+      padding: 5px;
+      background-color: #f0f0f0;
+      border-radius: 5px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 5px;
+      position: relative;
+    }
+
+    .dropzone.correct {
+      background-color: #d4edda;
+      border: 2px solid #28a745;
+    }
+
+    .dropzone.wrong {
+      background-color: #f8d7da;
+      border: 2px solid #dc3545;
+    }
+
+    .dropzone span.tipo {
+      padding: 4px 8px;
+      background-color: #6c757d;
+      color: white;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+
+    .checkmark {
+      position: absolute;
+      top: 4px;
+      right: 6px;
+      color: green;
+      font-weight: bold;
+    }
+
+    #limpar {
+      display: block;
+      margin: 20px auto;
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #ff4136;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    #limpar:hover {
+      background-color: #e00;
+    }
+
+    @media (min-width: 768px) {
+      .container {
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: stretch;
+        gap: 20px;
+      }
+
+      .draggables {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        max-width: 120px;
+        margin: auto;
+      }
+
+      .section {
+        width: 100%;
+        max-width: 320px;
+      }
+
+      h2 {
+        text-align: center;
+        margin: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<h1>Compatibilidade de Tipos Sanguíneos</h1>
+
+<div class="container">
+  <div class="section">
+    <h2>Pode Doar Para</h2>
+    <table>
+      <tbody id="doar-tabela"></tbody>
+    </table>
+  </div>
+
+  <div class="draggables" id="tipos">
+    <!-- Tipos serão inseridos aqui -->
+  </div>
+
+  <div class="section">
+    <h2>Pode Receber De</h2>
+    <table>
+      <tbody id="receber-tabela"></tbody>
+    </table>
+  </div>
+</div>
+
+<button id="limpar">Limpar Respostas</button>
+
+<script>
+  const tipos = ['O−','O+','A−','A+','B−','B+','AB−','AB+'];
+
+  const doacoes = {
+    'O−': ['O−', 'O+', 'A−', 'A+', 'B−', 'B+', 'AB−', 'AB+'],
+    'O+': ['O+', 'A+', 'B+', 'AB+'],
+    'A−': ['A−', 'A+', 'AB−', 'AB+'],
+    'A+': ['A+', 'AB+'],
+    'B−': ['B−', 'B+', 'AB−', 'AB+'],
+    'B+': ['B+', 'AB+'],
+    'AB−': ['AB−', 'AB+'],
+    'AB+': ['AB+']
+  };
+
+  const recebimentos = {
+    'O−': ['O−'],
+    'O+': ['O−', 'O+'],
+    'A−': ['O−', 'A−'],
+    'A+': ['O−', 'O+', 'A−', 'A+'],
+    'B−': ['O−', 'B−'],
+    'B+': ['O−', 'O+', 'B−', 'B+'],
+    'AB−': ['O−', 'A−', 'B−', 'AB−'],
+    'AB+': ['O−', 'O+', 'A−', 'A+', 'B−', 'B+', 'AB−', 'AB+']
+  };
+
+  const tiposContainer = document.getElementById('tipos');
+  tipos.forEach(tipo => {
+    const div = document.createElement('div');
+    div.textContent = tipo;
+    div.className = 'draggable';
+    div.draggable = true;
+    div.dataset.type = tipo;
+    tiposContainer.appendChild(div);
+  });
+
+  function criarTabela(id, dados, tipo) {
+    const tbody = document.getElementById(id);
+    tbody.innerHTML = '';
+    Object.entries(dados).forEach(([tipoBase, respostas]) => {
+      const tr = document.createElement('tr');
+      const tdTipo = document.createElement('td');
+      tdTipo.textContent = tipoBase;
+      tr.appendChild(tdTipo);
+
+      const tdDrop = document.createElement('td');
+      const dropzone = document.createElement('div');
+      dropzone.className = 'dropzone';
+      dropzone.dataset.para = tipoBase;
+      dropzone.dataset.tipo = tipo;
+      dropzone.dataset.resposta = JSON.stringify(respostas.sort());
+      tdDrop.appendChild(dropzone);
+      tr.appendChild(tdDrop);
+      tbody.appendChild(tr);
+    });
+  }
+
+  criarTabela('doar-tabela', doacoes, 'doar');
+  criarTabela('receber-tabela', recebimentos, 'receber');
+
+  document.querySelectorAll('.draggable').forEach(el => {
+    el.addEventListener('dragstart', ev => {
+      ev.dataTransfer.setData('text/plain', ev.target.dataset.type);
+    });
+  });
+
+  document.addEventListener('dragover', ev => ev.preventDefault());
+
+  document.querySelectorAll('.dropzone').forEach(zone => {
+    zone.addEventListener('drop', ev => {
+      ev.preventDefault();
+      const tipo = ev.dataTransfer.getData('text/plain');
+      if (!tipo) return;
+
+      const existente = Array.from(zone.children).find(el => el.textContent === tipo && el.classList.contains('tipo'));
+      if (!existente) {
+        const span = document.createElement('span');
+        span.textContent = tipo;
+        span.className = 'tipo';
+        span.addEventListener('click', () => {
+          span.remove();
+          validarDropzone(zone);
+        });
+        zone.appendChild(span);
+      }
+
+      validarDropzone(zone);
+    });
+  });
+
+  function validarDropzone(zone) {
+    const resposta = JSON.parse(zone.dataset.resposta);
+    const inseridos = Array.from(zone.querySelectorAll('span.tipo')).map(el => el.textContent).sort();
+    const checkExistente = zone.querySelector('.checkmark');
+
+    if (JSON.stringify(resposta) === JSON.stringify(inseridos)) {
+      zone.classList.add('correct');
+      zone.classList.remove('wrong');
+      if (!checkExistente) {
+        const check = document.createElement('span');
+        check.className = 'checkmark';
+        check.textContent = '✓';
+        zone.appendChild(check);
+      }
+    } else {
+      zone.classList.remove('correct');
+      zone.classList.add('wrong');
+      if (checkExistente) checkExistente.remove();
+    }
+  }
+
+  document.getElementById('limpar').addEventListener('click', () => {
+    document.querySelectorAll('.dropzone').forEach(zone => {
+      zone.innerHTML = '';
+      zone.classList.remove('correct', 'wrong');
+    });
+  });
+</script>
+
+</body>
+</html>

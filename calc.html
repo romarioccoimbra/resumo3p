@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Calculadora de Gotejamento</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f4f8;
+      padding: 20px;
+      color: #333;
+    }
+
+    h1 {
+      text-align: center;
+      color: #0077b6;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.1);
+    }
+
+    .section {
+      margin-bottom: 30px;
+    }
+
+    label {
+      display: block;
+      margin: 10px 0 5px;
+    }
+
+    input[type="number"] {
+      width: 100%;
+      padding: 8px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      margin-top: 10px;
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #0077b6;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #023e8a;
+    }
+
+    .resultado {
+      margin-top: 15px;
+      font-weight: bold;
+      background: #e0f7fa;
+      padding: 10px;
+      border-left: 4px solid #0077b6;
+      border-radius: 5px;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <h1>Calculadora de Gotejamento</h1>
+  <div class="container">
+
+    <!-- Transformador de mL em gotas -->
+    <div class="section">
+      <h2>1. mL para Gotas</h2>
+      <label for="ml">Quantidade em mL:</label>
+      <input type="number" id="ml" placeholder="Digite o valor em mL">
+      <button onclick="converterMlEmGotas()">Converter</button>
+      <div class="resultado" id="resultadoGotas"></div>
+    </div>
+
+    <!-- Transformador de horas em minutos -->
+    <div class="section">
+      <h2>2. Horas para Minutos</h2>
+      <label for="horas">Quantidade em horas:</label>
+      <input type="number" id="horas" placeholder="Digite o valor em horas">
+      <button onclick="converterHorasEmMinutos()">Converter</button>
+      <div class="resultado" id="resultadoMinutos"></div>
+    </div>
+
+    <!-- Cálculo de gotas por minuto -->
+    <div class="section">
+      <h2>3. Cálculo de Gotas por Minuto</h2>
+      <label for="volume">Volume em mL:</label>
+      <input type="number" id="volume" placeholder="Ex: 500">
+      <label for="tempoHoras">Tempo em horas:</label>
+      <input type="number" id="tempoHoras" placeholder="Ex: 4">
+      <button onclick="calcularGotasPorMinuto()">Calcular</button>
+      <div class="resultado" id="resultadoCalculo"></div>
+    </div>
+
+  </div>
+
+  <script>
+    function converterMlEmGotas() {
+      const ml = parseFloat(document.getElementById("ml").value);
+      if (isNaN(ml)) return alert("Digite um valor válido.");
+
+      const gotas = ml * 20;
+      document.getElementById("resultadoGotas").innerText = 
+        `${ml} mL equivalem a ${gotas} gotas (usando fator 20).`;
+    }
+
+    function converterHorasEmMinutos() {
+      const horas = parseFloat(document.getElementById("horas").value);
+      if (isNaN(horas)) return alert("Digite um valor válido.");
+
+      const minutos = horas * 60;
+      document.getElementById("resultadoMinutos").innerText = 
+        `${horas} hora(s) equivalem a ${minutos} minutos.`;
+    }
+
+    function calcularGotasPorMinuto() {
+      const volume = parseFloat(document.getElementById("volume").value);
+      const tempoHoras = parseFloat(document.getElementById("tempoHoras").value);
+      const fator = 20;
+
+      if (isNaN(volume) || isNaN(tempoHoras) || tempoHoras === 0) {
+        return alert("Preencha todos os campos corretamente.");
+      }
+
+      const tempoMin = tempoHoras * 60;
+      const resultado = Math.round((volume * fator) / tempoMin);
+
+      const calculo = `(${volume} mL × ${fator}) ÷ (${tempoHoras} h × 60) =\n(${volume * fator}) ÷ ${tempoMin} = ${resultado} gotas/min`;
+
+      document.getElementById("resultadoCalculo").innerText = 
+        `Resultado: ${resultado} gotas por minuto\nFórmula usada:\n${calculo}`;
+    }
+  </script>
+</body>
+</html>
