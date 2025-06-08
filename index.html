@@ -41,6 +41,30 @@
         padding-left: 20px;
       }
 
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        margin-top: 10px;
+        margin-bottom: 15px;
+      }
+
+      table,
+      th,
+      td {
+        border: 1px solid #ccc;
+      }
+
+      th,
+      td {
+        padding: 8px 12px;
+        text-align: center;
+        color: #333;
+      }
+
+      th {
+        background-color: #e0e7f1;
+      }
+
       .botao-pratica {
         margin-top: 15px;
         display: inline-block;
@@ -63,30 +87,218 @@
     <div class="tema">
       <h2>📉 ECG (Eletrocardiograma)</h2>
       <p>
-        O ECG é um exame que registra a atividade elétrica do coração ao longo
-        do tempo. Ele é fundamental para o diagnóstico de arritmias, infarto,
-        bloqueios cardíacos e outras alterações no ritmo cardíaco. O traçado do
-        ECG mostra ondas como a P (despolarização atrial), QRS (despolarização
-        ventricular) e T (repolarização ventricular). A leitura correta do ECG
-        exige atenção ao ritmo, frequência cardíaca, intervalos (como PR e QT) e
-        ao eixo cardíaco. O conhecimento dessa técnica permite uma atuação
-        rápida e precisa frente a emergências cardiovasculares.
+        O ECG (eletrocardiograma) é um exame que registra a atividade elétrica
+        do coração. Ele é usado para avaliar o ritmo cardíaco, detectar
+        arritmias, isquemias, infartos e outras alterações no funcionamento do
+        coração.
       </p>
+
+      <h3>Como funciona o ECG?</h3>
+      <p>
+        O coração gera impulsos elétricos para se contrair e bombear sangue.
+        Esses impulsos se espalham pelas células do músculo cardíaco e podem ser
+        detectados na pele por meio de eletrodos. O ECG capta esses sinais
+        elétricos e os transforma em traçados gráficos, chamados de derivações.
+      </p>
+
+      <h3>Como os eletrodos são colocados?</h3>
+      <p>No ECG padrão, usamos 10 eletrodos:</p>
+      <ul>
+        <li>
+          4 eletrodos nos membros:
+          <ul>
+            <li>Braço direito (RA)</li>
+            <li>Braço esquerdo (LA)</li>
+            <li>Perna direita (RL) – eletrodo neutro/terra</li>
+            <li>Perna esquerda (LL)</li>
+          </ul>
+        </li>
+        <li>
+          6 eletrodos no tórax (pré-cordiais):
+          <ul>
+            <li>V1: 4º espaço intercostal, ao lado direito do esterno</li>
+            <li>V2: 4º espaço intercostal, ao lado esquerdo do esterno</li>
+            <li>V3: entre V2 e V4</li>
+            <li>V4: 5º espaço intercostal, linha médio-clavicular esquerda</li>
+            <li>V5: linha axilar anterior, nível de V4</li>
+            <li>V6: linha axilar média, nível de V4</li>
+          </ul>
+        </li>
+      </ul>
+
+      <h3>
+        Por que o ECG de 12 derivações gera 12 sinais com apenas 10 eletrodos?
+      </h3>
+      <p>
+        Mesmo com 10 eletrodos, conseguimos registrar 12 derivações (ou visões
+        do coração):
+      </p>
+      <ul>
+        <li>
+          6 derivações dos membros:
+          <ul>
+            <li>Bipolares: I, II, III</li>
+            <li>Unipolares aumentadas: aVR, aVL, aVF</li>
+          </ul>
+        </li>
+        <li>6 derivações precordiais (tórax): V1 a V6</li>
+      </ul>
+      <p>
+        Isso é possível porque o aparelho combina os sinais dos eletrodos para
+        formar diferentes "visões" do coração em diferentes ângulos.
+      </p>
+
+      <h3>ECG de 16 derivações</h3>
+      <p>
+        No ECG de 16 derivações,
+        <strong>não são adicionados eletrodos extras</strong>, mas sim
+        <strong
+          >alguns eletrodos precordiais são reposicionados para novas posições
+          no tórax</strong
+        >
+        para captar melhor áreas específicas do coração, especialmente a parede
+        posterior e lateral do ventrículo esquerdo.
+      </p>
+      <ul>
+        <li>São mantidos os eletrodos padrão (10 eletrodos no corpo).</li>
+        <li>
+          V3R e V4R – colocados no lado direito do tórax (visualizam o
+          ventrículo direito).
+        </li>
+        <li>
+          Os eletrodos das derivações V7 e V8 são colocados respectivamente:
+          <ul>
+            <li>V7: 5º espaço intercostal, linha axilar posterior</li>
+            <li>V8: 5º espaço intercostal, linha médio-clavicular</li>
+          </ul>
+        </li>
+      </ul>
+      <p>
+        No resultado do exame, deve ser anotado claramente qual eletrodo
+        corresponde a qual posição para garantir a correta interpretação.
+      </p>
+
+      <h3>Resumo Final</h3>
+      <ul>
+        <li>O ECG capta a atividade elétrica do coração.</li>
+        <li>São usados 10 eletrodos para o ECG padrão.</li>
+        <li>
+          Os 6 eletrodos torácicos + 4 nos membros permitem gerar 12 derivações.
+        </li>
+        <li>
+          O ECG de 16 derivações é realizado reposicionando alguns eletrodos
+          precordiais para regiões posteriores e laterais (V7 e V8) e também
+          pode incluir derivações direitas (V3R, V4R).
+        </li>
+        <li>
+          A leitura correta do ECG depende da posição precisa dos eletrodos, que
+          deve ser informada no laudo para garantir a confiabilidade do exame.
+        </li>
+      </ul>
+
       <a class="botao-pratica" href="ecg.html">Acessar Prática de ECG</a>
     </div>
 
     <div class="tema">
-      <h2>🩸 Tipos Sanguíneos</h2>
+      <h2>🩸 Tipagem Sanguínea</h2>
       <p>
-        Os tipos sanguíneos são classificados com base nos antígenos presentes
-        nas hemácias. Os principais sistemas são ABO (tipos A, B, AB e O) e Rh
-        (positivo ou negativo). A compatibilidade sanguínea é essencial em
-        transfusões para evitar reações imunológicas. Por exemplo, o tipo O- é
-        considerado doador universal, enquanto AB+ é receptor universal.
-        Conhecer esses tipos e realizar corretamente os testes de tipagem é
-        fundamental na assistência ao paciente em situações como cirurgias,
-        traumas e gestação.
+        O tipo sanguíneo é uma classificação que identifica os antígenos
+        presentes na superfície das hemácias (glóbulos vermelhos). Os principais
+        sistemas usados para essa classificação são:
       </p>
+      <ul>
+        <li>
+          <strong>Sistema ABO:</strong> Define os tipos A, B, AB e O, de acordo
+          com os antígenos A e B.
+        </li>
+        <li>
+          <strong>Sistema Rh:</strong> Classifica o sangue como Rh positivo
+          (presença do fator Rh) ou Rh negativo (ausência do fator Rh).
+        </li>
+      </ul>
+      <p><strong>Por que a tipagem sanguínea é importante?</strong></p>
+      <ul>
+        <li>
+          É fundamental para garantir a compatibilidade em transfusões de sangue
+          e transplantes de órgãos, evitando reações adversas graves.
+        </li>
+        <li>
+          A transfusão com sangue incompatível pode causar choque hemolítico,
+          que é uma reação imunológica perigosa.
+        </li>
+      </ul>
+      <p>
+        <strong>Tipos Sanguíneos e suas características principais:</strong>
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>Tipo Sanguíneo</th>
+            <th>Antígeno na Hemácia</th>
+            <th>Anticorpos no Plasma</th>
+            <th>Pode Receber Sangue de</th>
+            <th>Pode Doar Sangue para</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>A</td>
+            <td>A</td>
+            <td>Anti-B</td>
+            <td>A e O</td>
+            <td>A e AB</td>
+          </tr>
+          <tr>
+            <td>B</td>
+            <td>B</td>
+            <td>Anti-A</td>
+            <td>B e O</td>
+            <td>B e AB</td>
+          </tr>
+          <tr>
+            <td>AB</td>
+            <td>A e B</td>
+            <td>Nenhum</td>
+            <td>A, B, AB e O</td>
+            <td>Apenas AB</td>
+          </tr>
+          <tr>
+            <td>O</td>
+            <td>Nenhum</td>
+            <td>Anti-A e Anti-B</td>
+            <td>Apenas O</td>
+            <td>A, B, AB e O (doador universal)</td>
+          </tr>
+        </tbody>
+      </table>
+      <p><strong>Sistema Rh:</strong></p>
+      <ul>
+        <li>Se a pessoa tem o fator Rh, é Rh positivo (+).</li>
+        <li>Se não tem, é Rh negativo (-).</li>
+        <li>
+          Pacientes Rh negativos só podem receber sangue Rh negativo para evitar
+          sensibilização.
+        </li>
+      </ul>
+      <p><strong>Exemplo prático para transfusão:</strong></p>
+      <ul>
+        <li>
+          Um paciente com sangue tipo A+ pode receber sangue do tipo A+ ou O+.
+        </li>
+        <li>
+          Um paciente com sangue O- pode doar para qualquer tipo, mas só pode
+          receber O-.
+        </li>
+      </ul>
+      <p><strong>Resumo final:</strong></p>
+      <ul>
+        <li>Conhecer o tipo sanguíneo é essencial para evitar complicações.</li>
+        <li>Sempre realizar teste de compatibilidade antes da transfusão.</li>
+        <li>
+          No pré-natal, a tipagem Rh é importante para prevenir a doença
+          hemolítica do recém-nascido.
+        </li>
+      </ul>
       <a class="botao-pratica" href="sangue.html"
         >Acessar Prática de Tipagem Sanguínea</a
       >
